@@ -18,8 +18,8 @@ repo는 Repositories를 말하고 큰 폴더라고 생각하시면 됩니다.
 
 2. 수정
 
-수정도 오른쪽 상단에 edit으로 하고, 반드시 아래에 초록색 commit change를 눌러야 저장이 됩니다.<br />
-참고로 수정된 게 없을 땐, commit change가 색도 연하고 눌리지 않습니다.
+마찬가지로 오른쪽 상단에 edit으로 하고, 반드시 아래에 초록색 commit change를 눌러야 저장이 됩니다.<br />
+바뀐 게 없다면 commit change가 색도 연하고 눌리지 않습니다.
 
 ---
 
