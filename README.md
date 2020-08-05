@@ -31,7 +31,7 @@ README는 현재 repo에 대한 설명을 쓰는 파일입니다.<br />
 - 사용하실 분은 해당 파일이 구판 markdown임을 상기하시고, md 문법에 관해선 링크로 대신합니다.
 - <https://heropy.blog/2017/09/30/markdown/>
 
-commits은 해당 repo에 저장한 횟수입니다.
+commits은 해당 repo에 저장한 횟수입니다.<br />
 commits에서 조금 더 들어가면 저장된 시간과 함께 어떤 식으로 변경되었는지 확인할 수 있습니다.
 
 ---
