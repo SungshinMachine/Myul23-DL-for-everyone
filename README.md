@@ -5,7 +5,7 @@ repo는 Repositories를 말하고 큰 폴더라고 생각하시면 됩니다.
 
 자기 이름의 repo를 누르면 나오는 곳이 개인이 파일을 저장하는 곳입니다.
 
-- 현재 보고 있는 곳이 제 repo입니다.
+- 현재 보고 있는 곳이 제 repo이고 이곳에 파일을 올리게 됩니다.
 
 ---
 
@@ -23,18 +23,25 @@ repo는 Repositories를 말하고 큰 폴더라고 생각하시면 됩니다.
 
 ---
 
+3. 추가적으로
+
 README는 현재 repo에 대한 설명을 쓰는 파일입니다.<br />
 사용하고 싶으신 분은 사용하셔도 좋고, 필요 없는 분은 없애셔도 상관 없습니다.
 
-- 사용하실 분들은 해당 파일이 초기 markdown이심을 상기하시고, md 문법에 관해선 <https://heropy.blog/2017/09/30/markdown/>를 참고하시기 바랍니다.
+- 사용하실 분은 해당 파일이 구판 markdown임을 상기하시고, md 문법에 관해선 링크로 대신합니다.
+- <https://heropy.blog/2017/09/30/markdown/>
 
-참고로 commits은 해당 repo에 올린 횟수입니다.
+commits은 해당 repo에 저장한 횟수입니다.
 commits에서 조금 더 들어가면 저장된 시간과 함께 어떤 식으로 변경되었는지 확인할 수 있습니다.
 
 ---
 
-추가적으로 만약에 자신의 repo를 링크로 다른 사람한테 보여주고 싶다면,<br />
-자기 Repo 설정 제일 아래 Danger Zone에서 Make this repository public 설정에 Make Public 버튼을 누르고 저장하면 됩니다.
+자신의 repo를 다른 사람한테 보여주고 싶다면,
 
-- 보여주고 싶은 사람이 github가 있고 그 사람만 보여주고 싶으면, 다들 팀 권한을 마스터로 할 생각이니 그 사람을 collaborater로 설정하면 됩니다.<br />
-이러면 현재 팀 설정이 collaborator는 read로 되어있으니 보는 것까지는 가능합니다.
+1. 공개로 전환
+
+자기 repo -> Settings -> Danger Zone에서 Make this repository public 설정에 Make Public 버튼을 누르고 저장하면 됩니다.
+
+2. 특정 인물만 보여주기
+
+보여주고 싶은 사람이 github가 있고 그 사람만 보여주고 싶으면, 자신의 repo -> Settings -> Manage access -> Invite teams or people을 통해 권한을 부여하고 초대하시면 됩니다.
