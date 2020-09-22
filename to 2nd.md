@@ -3,6 +3,7 @@
 ---
 
 - from [DL for everyone](https://github.com/Myul23/summary/DL%20for%20everyone.md)
+- [hunkim's DeepLearningZeroToAll](https://github.com/hunkim/DeepLearningZeroToAll)
 - b"String", 'b' indicated _Bytes literals_. <https://stackoverflow.com/questions/6269765/>
 - <https://www.tensorflow.org/>
 
