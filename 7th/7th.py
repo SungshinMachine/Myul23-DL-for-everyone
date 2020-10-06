@@ -39,7 +39,8 @@ with tf.Session() as sess:
 xy = np.loadtxt("data-o4-zoo.csv", delimiter=',', dtype=np.float32)
 x_data = xy[:, 0:-1]
 y_data = xy[:, [-1]]
-np_classes = 7
+# y_data = [[3], [3], [3], [2], [2], [2], [1], [1]]
+nb_classes = 7
 
 X = tf.placeholder(tf.float32, [None, 16])
 Y = tf.placeholder(tf.int32, [None, 1])
@@ -49,14 +50,14 @@ Y_one_hot = tf.one_hot(Y, nb_classes)
 Y_one_hot = tf.reshape(Y_one_hot, [-1, nb_classes])
 # -1: 정확한 갯수 지정을 피한다.
 
-W = tf.Variable(tf.random_normal([16, nb_classes]), name="weight")
-b = tf.Variable(tf.random_normal([nb_classes]), name="bias")
+# W = tf.Variable(tf.random_normal([16, nb_classes]), name="weight")
+# b = tf.Variable(tf.random_normal([nb_classes]), name="bias")
 
 logits = tf.matmul(X, W) + b
 hypothesis = tf.nn.softmax(logits)
 
 cost_i = tf.nn.softmax_cross_entropy_with_logits(logits=logits,
-                                                 lables=Y_one_hot)
+                                                 labels=Y_one_hot)
 cost = tf.reduce_mean(cost_i)
 optimizer = tf.train.GradientDescentOptimizer(
     learning_rate=0.01).minimize(cost)
@@ -81,5 +82,7 @@ with tf.Session() as sess:
     # prediction이긴 한데, 모형 적합에 사용한 걸 써서 의미 없지 않나.
     pred = sess.run(prediction, feed_dict={X: x_data})
     for p, y in zip(pred, y_data.flatten()):
-        # flatten(): 개인적으론 차원 낮추기로 보이나, 열벡터를 행벡터로 바꾸는 데 사용되는 것 같다.
+        # for p, y in zip(pred, y_data):
         print(f"[{p == int(y)}] Prediction: {p} True Y: {int(y)}")
+        # print(f"[{p == y}] Prediction: {p} True Y: {y}")
+# flatten(): 개인적으론 차원 낮추기로 보이나, 열벡터를 행벡터로 바꾸는 데 사용되는 것 같다.
