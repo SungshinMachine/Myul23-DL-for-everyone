@@ -1,5 +1,9 @@
 # Github repo 사용법
 
+- Andrew Ng 강의 주차 기준 정리
+
+---
+
 먼저 github는 git을 이용하는 외부저장소입니다.<br />
 repo는 Repositories를 말하고 큰 폴더라고 생각하시면 됩니다.
 
