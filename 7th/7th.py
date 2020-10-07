@@ -33,7 +33,7 @@ with tf.Session() as sess:
     total = sess.run(
         hypothesis, feed_dict={X: [[1, 11, 7, 9], [1, 3, 4, 3], [1, 1, 0, 1]]})
     print(total, sess.run(tf.argmax(total, 1)), sep="\n")
-# argmax나 arg_max나 잘 되는 것 같은데, argmax가 2의 함수 이름과 같아서 별 다른 waring을 생성하지 않는다.
+# argmax나 arg_max나 잘 되는 것 같은데, argmax가 2의 함수 이름과 같아서 별 다른 warning을 생성하지 않는다.
 
 # Fancy Softmax Classifier
 xy = np.loadtxt("data-o4-zoo.csv", delimiter=',', dtype=np.float32)
@@ -45,8 +45,7 @@ nb_classes = 7
 X = tf.placeholder(tf.float32, [None, 16])
 Y = tf.placeholder(tf.int32, [None, 1])
 Y_one_hot = tf.one_hot(Y, nb_classes)
-# 일반적으로 max값을 1로 하는 각각의 벡터를 반환하면서 (내부의 모종의 이유로)
-# 중간 차원이 하나 추가되어 나온다. 따라서,
+# 일반적으로 max값을 1로 하는 각각의 벡터를 반환하면서 중간 차원이 하나 추가되어 나온다.
 Y_one_hot = tf.reshape(Y_one_hot, [-1, nb_classes])
 # -1: 정확한 갯수 지정을 피한다.
 
