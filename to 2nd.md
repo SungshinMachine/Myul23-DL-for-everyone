@@ -1,11 +1,12 @@
-요약집의 한 부분으로 요약해서 일단 올립니다.
+> # 모두를 위한 딥러닝
 
----
-
-- from [DL for everyone](https://github.com/Myul23/summary/DL%20for%20everyone.md)
-- [hunkim's DeepLearningZeroToAll](https://github.com/hunkim/DeepLearningZeroToAll)
+- Instructor: 김성훈 (Sung Kim)
+- Lectures: [Inflearn](https://www.inflearn.com/course/%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EB%94%A5%EB%9F%AC%EB%8B%9D-%EA%B0%95%EC%A2%8C#)
+- Sub-link: [Youtube](https://www.youtube.com/channel/UCML9R2ol-l0Ab9OXoNnr7Lw)
+- [DeepLearning Zero To All](https://github.com/hunkim/DeepLearningZeroToAll)
 - b"String", 'b' indicated _Bytes literals_. <https://stackoverflow.com/questions/6269765/>
 - <https://www.tensorflow.org/>
+- tensorflow 기본 이해를 위해 요약한 파일과 합쳤다.
 
 ---
 
