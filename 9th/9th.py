@@ -115,7 +115,7 @@ tf.stack([x, y, x], axis=1).eval()  # transpose 후, 열로 합치기
 # Ones and Zeros like
 # 그냥 np.ones, np.zeros 쓰면 안 되는 걸까.
 x = [[0, 1, 2], [2, 1, 0]]
-tf.one_like(x).eval()
+tf.ones_like(x).eval()
 tf.zeros_like(x).eval()
 
 # Zip
