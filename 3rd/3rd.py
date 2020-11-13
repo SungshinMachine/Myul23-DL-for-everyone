@@ -52,9 +52,7 @@ Y = tf.placeholder(tf.float32)  # shape default, None
 
 ## 3. session
 for step in range(2001):
-    cost_val, W_val, b_val, _ = sess.run(
-        [cost, W, b, train], feed_dict={X: [1, 2, 3], Y: [1, 2, 3]}
-    )
+    cost_val, W_val, b_val, _ = sess.run([cost, W, b, train], feed_dict={X: [1, 2, 3], Y: [1, 2, 3]})
     if step % 20 == 0:
         print(step, cost_val, W_val, b_val)
 

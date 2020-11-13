@@ -29,14 +29,11 @@ train = optimizer.minimize(cost)
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 for step in range(2001):
-    cost_val, hy_val, _ = sess.run(
-        [cost, hypothesis, train],
-        feed_dict={x1: x1_data, x2: x2_data, x3: x3_data, y: y_data},
-    )
+    cost_val, hy_val, _ = sess.run([cost, hypothesis, train], feed_dict={x1: x1_data, x2: x2_data, x3: x3_data, y: y_data})
     if step % 10 == 0:
         print(step, "Cost :", cost_val, "\nPrediction:", hy_val)
 
-#################################################
+
 # 2. vector implementation (매트릭스화)
 ## data set
 x_data = [[73, 80, 75], [93, 88, 93], [89, 91, 90], [96, 98, 100], [73, 66, 70]]
@@ -59,21 +56,16 @@ train = optimizer.minimize(cost)
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 for step in range(2001):
-    cost_val, hy_val, _ = sess.run(
-        [cost, hypothesis, train], feed_dict={X: x_data, Y: y_data}
-    )
+    cost_val, hy_val, _ = sess.run([cost, hypothesis, train], feed_dict={X: x_data, Y: y_data})
     if step % 10 == 0:
         print(step, "Cost :", cost_val, "\nPrediction:", hy_val)
 
 ## Ask
 print("Your score will be", sess.run(hypothesis, feed_dict={X: [[100, 70, 101]]}))
-print(
-    "Other scores will be",
-    sess.run(hypothesis, feed_dict={X: [[60, 70, 110], [90, 100, 80]]}),
-)
+print("Other scores will be", sess.run(hypothesis, feed_dict={X: [[60, 70, 110], [90, 100, 80]]}))
 # 진짜 code style black으로 한 건데, 코드 길이를 너무 생각해줘서 짜증날 정도..
 
-#################################################
+
 # addition) load data(file)
 # 매번 생각하는 거지만, numpy가 더 구성적으로 단단한가?
 # np에 대한 참조가 없는 함수에 대해서 확장이 안돼서 개인적으론 별로라고 생각하는데
@@ -111,7 +103,7 @@ print(
 #     if step % 10 == 0:
 #         print(step, "Cost :", cost_val, "\nPrediction:", hy_val)
 
-#################################################
+
 # addition) local 용량을 생각해서 read-quere를 이용한 load data(file)
 # train.batch도 placeholder처럼 일단 구성하고 구상하고, Session().run()을 통해 돌리게 된다.
 # ## Quere 생성
@@ -137,10 +129,7 @@ print(
 # # min_after_dequeue = 10000
 # # capacity = min_after_dequeue + 3 * batch_size
 # # example_batch, label_batch = tf.train.shuffle_batch(
-# #     [example, label],
-# #     batch_size=batch_size,
-# #     capacity=capacity,
-# #     min_after_dequeue=min_after_dequeue,
+# #     [example, label], batch_size=batch_size, capacity=capacity, min_after_dequeue=min_after_dequeue
 # # )
 
 # ## 1. train용 batch처럼 한 번에 batch_size만큼 불러오기
@@ -168,9 +157,7 @@ print(
 
 # for step in range(2001):
 #     x_batch, y_batch = sess.run([train_x_batch, train_y_batch])
-#     cost_val, hy_val, _ = sess.run(
-#         [cost, hypothesis, train], feed_dict={X: x_batch, Y: y_batch}
-#     )
+#     cost_val, hy_val, _ = sess.run([cost, hypothesis, train], feed_dict={X: x_batch, Y: y_batch})
 #     if step % 10 == 0:
 #         print(step, "Cost :", cost_val, "\nPrediction:", hy_val)
 

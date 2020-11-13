@@ -13,14 +13,14 @@ import tensorflow as tf
 import numpy as np
 
 # 김밥이 array... 직업병?
-t = np.array([0., 1., 2., 3., 4., 5., 6.])
+t = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0])
 # pp.pprint(t)  # 쉽게 내용을 보고자 한 것으로 보임.
 print(t, f"dimension: {t.ndim}, shape: {t.shape}", sep="\n")
 print(t[0], t[1], t[-1])
 # 맞다, python의 slicing은 마지막 위치값을 반환하지 않는다. 아마도 range나 i < final로 만들어서겠지.
 print(t[2:5], t[4:-1], t[:2], t[3:])
 
-t = np.array([[1., 2., 3.], [4., 5., 6.], [7., 8., 9.], [10., 11., 12.]])
+t = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0], [10.0, 11.0, 12.0]])
 # pp.pprinf(t)
 print(t, f"dimension: {t.ndim}, shape: {t.shape}", sep="\n")
 
@@ -31,48 +31,46 @@ tf.shape(t).eval()
 t = tf.constant([[1, 2], [3, 4]])
 tf.shape(t).eval()
 
-t = tf.constant([[[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]],
-                  [[13, 14, 15, 16], [17, 18, 19, 20], [21, 22, 23, 24]]]])
+t = tf.constant([[[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]], [[13, 14, 15, 16], [17, 18, 19, 20], [21, 22, 23, 24]]]])
 tf.shape(t).eval()  # 1,2,3,4
 # Axis, Dimension과 유사한 값을 가지며, 바깥쪽(괄호)부터 axis-i의 값을 갖는다.
 
 # Matmul vs Multiply
-matrix1 = tf.constant([[1., 2.], [3., 4.]])
-matrix2 = tf.constant([[1.], [2.]])
-print(f"Matrix 1 shpae: {matrix1.shape}, Matrix 2 shape: {matrix2.shape}",
-      sep="\t")
+matrix1 = tf.constant([[1.0, 2.0], [3.0, 4.0]])
+matrix2 = tf.constant([[1.0], [2.0]])
+print(f"Matrix 1 shpae: {matrix1.shape}, Matrix 2 shape: {matrix2.shape}", sep="\t")
 tf.matmul(matrix1, matrix2).eval()
 (matrix1 * matrix2).eval()
 
 # Broadcasting, 자동 형변환과 같은 편리함과 단점을 제공
-matrix1 = tf.constant([[3., 3.]])
-matrix2 = tf.constant([[2., 2.]])
+matrix1 = tf.constant([[3.0, 3.0]])
+matrix2 = tf.constant([[2.0, 2.0]])
 (matrix1 + matrix2).eval()
 
-matrix1 = tf.constant([[1., 2.]])
-matrix2 = tf.constant(3.)
+matrix1 = tf.constant([[1.0, 2.0]])
+matrix2 = tf.constant(3.0)
 (matrix1 + matrix2).eval()
 
-matrix1 = tf.constant([[1., 2.]])
-matrix2 = tf.constant([3., 4.])
+matrix1 = tf.constant([[1.0, 2.0]])
+matrix2 = tf.constant([3.0, 4.0])
 (matrix1 + matrix2).eval()
 
-matrix1 = tf.constant([[1., 2.]])
-matrix2 = tf.constant([[3.], [4.]])
+matrix1 = tf.constant([[1.0, 2.0]])
+matrix2 = tf.constant([[3.0], [4.0]])
 (matrix1 + matrix2).eval()
 
 # Reduce mean 파헤치기
 tf.reduce_mean([1, 2], axis=0).eval()
 # 원래 데이터가 int였으므로 값을 자동 형변환해 int로 반환
 
-x = [[1., 2.], [3., 4.]]
+x = [[1.0, 2.0], [3.0, 4.0]]
 tf.reduce_mean(x).eval()
 tf.reduce_mean(x, axis=0).eval()  # 2, 3
 tf.reduce_mean(x, axis=1).eval()  # 1.5, 3.5
 tf.reduce_mean(x, axis=-1).eval()  # 1.5, 3.5
 
 # Reduce sum
-x = [[1., 2.], [3., 4.]]
+x = [[1.0, 2.0], [3.0, 4.0]]
 tf.reduce_sum(x).eval()
 tf.reduce_sum(x, axis=0).eval()  # 4, 6
 tf.reduce_sum(x, axis=-1).eval()  # 3, 7

@@ -1,12 +1,9 @@
-#
-
 # XOR
 # one hidden layer having two hidden units
 
 # sigmoid가 중간 값을 처리하는 함수 정도라는 걸 자꾸 까먹는다. 4학년 수업은 다 잊어버렸나보다.
 # 미분, 편미분, chain rule과 Back-propagation
 # Back부터 미분을 통해 출력-layer에 대한 입력-layer의 각각의 순간변화율, 즉 변화 정도에 대하여 구할 수 있다.
-
 
 import numpy as np
 import tensorflow as tf
@@ -15,12 +12,8 @@ import tensorflow as tf
 x_data = np.array([[0, 0], [0, 1], [1, 0], [1, 1]], dtype=np.float32)
 y_data = np.array([[0], [1], [1], [0]], dtype=np.float32)
 
-
 X = tf.placeholder(tf.float32)
 Y = tf.placeholder(tf.float32)
-
-num_units = 10  # 2
-# first hidden layer
 W1 = tf.Variable(tf.random_normal([2, num_units]), name="weight1")
 b1 = tf.Variable(tf.random_normal([num_units]), name="bias1")
 layer1 = tf.sigmoid(tf.matmul(X, W1) + b1)
@@ -38,7 +31,6 @@ train = optimizer.minimize(cost)
 
 predicted = tf.cast(hypothesis > 0.5, dtype=tf.float32)
 accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, Y), dtype=tf.float32))
-
 
 # 일일이 숫자 확인 -> TensorBoard를 이용한 확인
 # 1. From TF graph, decide wihch tensors you want to log
@@ -72,7 +64,6 @@ cost_sum = tf.summary.scalar("cost", cost)
 # 2. Mer all summaries
 summary = tf.summary.merge_all()
 
-
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
@@ -88,16 +79,10 @@ with tf.Session() as sess:
         writer.add_summary(s, global_step=step)
 
         if step % 100 == 0:
-            print(
-                step,
-                sess.run(cost, feed_dict={X: x_data, Y: y_data}),
-                sess.run([W1, W2]),
-            )
+            print(step, sess.run(cost, feed_dict={X: x_data, Y: y_data}), sess.run([W1, W2]))
 
     # 사실 적합시킨 데이터를 준 꼴이라 정말 높게 안 나오면 그냥 망.
-    h, c, a = sess.run(
-        [hypothesis, predicted, accuracy], feed_dict={X: x_data, Y: y_data}
-    )
+    h, c, a = sess.run([hypothesis, predicted, accuracy], feed_dict={X: x_data, Y: y_data})
     print(f"Hypothesis: {h}", f"Correct: {c}", f"Accuracy: {a}", sep="\n")
 
 # 5. Launch TensorBoard

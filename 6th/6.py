@@ -10,8 +10,7 @@ W = tf.Variable(tf.random_normal([2, 1]), name="weight")
 b = tf.Variable(tf.random_normal([1]), name="bias")
 
 hypothesis = tf.sigmoid(tf.matmul(X, W) + b)
-cost = -tf.reduce_mean(Y * tf.log(hypothesis) +
-                       (1 - Y) * tf.log(1 - hypothesis))
+cost = -tf.reduce_mean(Y * tf.log(hypothesis) + (1 - Y) * tf.log(1 - hypothesis))
 train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 
 # model accuracy
@@ -26,9 +25,5 @@ with tf.Session() as sess:
         if step % 2000 == 0:
             print(step, cost_val)
 
-    h, c, a = sess.run([hypothesis, predicted, accuracy],
-                       feed_dict={
-                           X: x_data,
-                           Y: y_data
-                       })
+    h, c, a = sess.run([hypothesis, predicted, accuracy], feed_dict={X: x_data, Y: y_data})
     print("hypothesis:", h, "\nCorrect (Y):", c, "\nAccuracy:", a, sep="\n")

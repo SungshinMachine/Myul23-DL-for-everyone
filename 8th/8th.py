@@ -15,10 +15,8 @@ from sklearn.preprocessing import MinMaxScaler
 #               - big: (over-shooting) will not converge, be divergency
 
 # scikitlearn이었던가에 train-test 분할 함수가 있는데, default ratio는 train:test = 7:3이다.
-x_data = [[1, 2, 1], [1, 3, 2], [1, 3, 4], [1, 5, 5], [1, 7, 5], [1, 2, 5],
-          [1, 6, 6], [1, 7, 7]]
-y_data = [[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 0],
-          [1, 0, 0], [1, 0, 0]]
+x_data = [[1, 2, 1], [1, 3, 2], [1, 3, 4], [1, 5, 5], [1, 7, 5], [1, 2, 5], [1, 6, 6], [1, 7, 7]]
+y_data = [[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 0], [1, 0, 0], [1, 0, 0]]
 x_test = [[2, 1, 1], [3, 1, 2], [3, 3, 4]]
 y_test = [[0, 0, 1], [0, 0, 1], [0, 0, 1]]
 
@@ -39,11 +37,7 @@ accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     for step in range(201):
-        cost_val, W_val, _ = sess.run([cost, W, optimizer],
-                                      feed_dict={
-                                          X: x_data,
-                                          Y: y_data
-                                      })
+        cost_val, W_val, _ = sess.run([cost, W, optimizer], feed_dict={X: x_data, Y: y_data})
         print(step, cost_val, "\n", W_val)
 
     print("Prediction:", sess.run(prediction, feed_dict={X: x_data}))
@@ -55,14 +49,18 @@ with tf.Session() as sess:
 # 또, 직관적인 이해 등을 이유로 zero-centering을 한다.
 # normalization + zero-centering => standardization의 일종
 
-xy = np.array([[828.659973, 833.450012, 908100, 828.349976, 831.659973],
-               [823.02002, 828.070007, 1828100, 821.655029, 828.070007],
-               [819.929993, 824.400024, 1438100, 818.97998, 824.159973],
-               [816, 820.958984, 1008100, 815.48999, 819.23999],
-               [819.359985, 823, 1188100, 818.469971, 818.97998],
-               [819, 823, 1198100, 816, 820.450012],
-               [811.700012, 815.25, 1098100, 809.780029, 813.669983],
-               [809.51001, 816.659973, 1398100, 804.539978, 809.559998]])
+xy = np.array(
+    [
+        [828.659973, 833.450012, 908100, 828.349976, 831.659973],
+        [823.02002, 828.070007, 1828100, 821.655029, 828.070007],
+        [819.929993, 824.400024, 1438100, 818.97998, 824.159973],
+        [816, 820.958984, 1008100, 815.48999, 819.23999],
+        [819.359985, 823, 1188100, 818.469971, 818.97998],
+        [819, 823, 1198100, 816, 820.450012],
+        [811.700012, 815.25, 1098100, 809.780029, 813.669983],
+        [809.51001, 816.659973, 1398100, 804.539978, 809.559998],
+    ]
+)
 xy = MinMaxScaler().fit_transform(xy)
 x_data = xy[:, 0:-1]
 y_data = xy[:, [-1]]
@@ -80,15 +78,12 @@ train = optimizer.minimize(cost)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     for step in range(2001):
-        cost_val, hy_val, _ = sess.run([cost, hypothesis, train],
-                                       feed_dict={
-                                           X: x_data,
-                                           Y: y_data
-                                       })
+        cost_val, hy_val, _ = sess.run([cost, hypothesis, train], feed_dict={X: x_data, Y: y_data})
         print(step, "Cost:", cost_val, "\nPrediction\n", hy_val)
 
 # 추가) MNIST
 from tensorflow.examples.tutorials.mnist import input_data
+
 # Check out https://www.tensorflow.org/get_started/mnist/beginners for
 # 오.. 정말 다운 받네요? 와..
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
@@ -118,32 +113,18 @@ with tf.Session() as sess:
 
         for i in range(total_batch):
             batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-            c, _ = sess.run([cost, optimizer],
-                            feed_dict={
-                                X: batch_xs,
-                                Y: batch_ys
-                            })
+            c, _ = sess.run([cost, optimizer], feed_dict={X: batch_xs, Y: batch_ys})
             avg_cost += c / total_batch
         print("Epoch: %04d" % (epoch + 1), "cost = {:.9f}".format(avg_cost))
 
-    print(
-        "Accuracy:",
-        accuracy.eval(session=sess,
-                      feed_dict={
-                          X: mnist.test.images,
-                          Y: mnist.test.labels
-                      }))
+    print("Accuracy:", accuracy.eval(session=sess, feed_dict={X: mnist.test.images, Y: mnist.test.labels}))
 
     # 그냥 시각적으로 표현하고 싶으셨던 듯?
     import matplotlib.pyplot as plt
     import random
+
     r = random.randint(0, mnist.test.num_examples - 1)
-    print("Label:", sess.run(tf.argmax(mnist.test.labels[r:r + 1], 1)))
-    print(
-        "Prediction:",
-        sess.run(tf.argmax(hypothesis, 1),
-                 feed_dict={X: mnist.test.images[r:r + 1]}))
-    plt.imshow(mnist.test.images[r:r + 1].reshape(28, 28),
-               cmap="Greys",
-               interpolation="nearest")
+    print("Label:", sess.run(tf.argmax(mnist.test.labels[r : r + 1], 1)))
+    print("Prediction:", sess.run(tf.argmax(hypothesis, 1), feed_dict={X: mnist.test.images[r : r + 1]}))
+    plt.imshow(mnist.test.images[r : r + 1].reshape(28, 28), cmap="Greys", interpolation="nearest")
     plt.show()
