@@ -143,15 +143,14 @@ with tf.Session() as sess:
 
     print("Accuracy:", accuracy.eval(session=sess, feed_dict={X: mnist.test.images, Y: mnist.test.labels, keep_prob: 1}))
 
-    # 그냥 시각적으로 표현하고 싶으셨던 듯?
     import matplotlib.pyplot as plt
     import random
 
     r = random.randint(0, mnist.test.num_examples - 1)
     print("Label:", sess.run(tf.argmax(mnist.test.labels[r : r + 1], 1)))
     print("Prediction:", sess.run(tf.argmax(hypothesis, 1), feed_dict={X: mnist.test.images[r : r + 1], keep_prob: 1}))
-    plt.imshow(mnist.test.images[r : r + 1].reshape(28, 28), cmap="Greys", interpolation="nearest")
-    plt.show()
+    # plt.imshow(mnist.test.images[r : r + 1].reshape(28, 28), cmap="Greys", interpolation="nearest")
+    # plt.show()
 
 
 # Optimizer
