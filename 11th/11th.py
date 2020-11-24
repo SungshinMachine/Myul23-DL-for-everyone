@@ -75,7 +75,7 @@ import numpy as np
 # 적게는 2%에서 크게는 4% 정도까지 정확도가 올라간다고 합니다.
 
 # addition
-# Fast forward
+# Fast forward: Drop-out이 모델 학습 때 몇 개의 input을 없애고(줄이고) 하는 거라면, Fast forward는 몇 개의 hidden layer를 건너 뛰면서 학습시키는 것.
 # Split & merge: hidden unit을 통해 input layer의 수보다 hidden unit의 수가 적어졌다가 많아졌다가.
 # Recurrent network, RNN: 앞으로 나가는 것에서 나아가 같은 layer에 다른 unit으로 가기도 하고 다시 나아가기도 하고.
 
