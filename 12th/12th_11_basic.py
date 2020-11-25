@@ -25,63 +25,64 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# # 작은 데이터로 함수 알기 과정
-# image = np.array([[[[1], [2], [3]], [[4], [5], [6]], [[7], [8], [9]]]], dtype=np.float32)
-# weight = tf.constant([[[[1.0, 10.0, -1.0]], [[1.0, 10.0, -1.0]]], [[[1.0, 10.0, -1.0]], [[1.0, 10.0, -1.0]]]])
+# 작은 데이터로 함수 알기 과정
+image = np.array([[[[1], [2], [3]], [[4], [5], [6]], [[7], [8], [9]]]], dtype=np.float32)
+weight = tf.constant([[[[1.0, 10.0, -1.0]], [[1.0, 10.0, -1.0]]], [[[1.0, 10.0, -1.0]], [[1.0, 10.0, -1.0]]]])
 
-# print(f"image.shape: {image.shape}, weight.shape: {weight.shape}")
-# plt.imshow(image.reshape(3, 3), cmap="Greys")
-# plt.show()  # 와 이제 알았는데, black formatter는 ;를 지워버리는구나.
+print(f"image.shape: {image.shape}, weight.shape: {weight.shape}")
+plt.imshow(image.reshape(3, 3), cmap="Greys")
+plt.show()  # 와 이제 알았는데, black formatter는 ;를 지워버리는구나.
 
-# sess = tf.InteractiveSession()
+sess = tf.InteractiveSession()
 # input dimension에 대해 계속 생각할 것.
-# conv = tf.nn.conv2d(image, weight, strides=[1, 1, 1, 1], padding="SAME")
+conv = tf.nn.conv2d(image, weight, strides=[1, 1, 1, 1], padding="SAME")
 # SAME: stride가 한 칸씩 움직인다면 output.dim이 input.dim과 같도록
-# conv_img = conv.eval()
-# print(f"conv_img.shape: {conv_img.shape}")
+conv_img = conv.eval()
+print(f"conv_img.shape: {conv_img.shape}")
 
-# conv_img = np.swapaxes(conv_img, 0, 3)
-# for i, one_img in enumerate(conv_img):
-#     # padding = SAME으로 CNN 이후에 3x3의 행렬이 되었으므로
-#     print(one_img.reshape(3, 3))
-#     plt.subplot(1, 3, i + 1)
-#     plt.imshow(one_img, cmap="gray")
-# plt.show()
+conv_img = np.swapaxes(conv_img, 0, 3)
+for i, one_img in enumerate(conv_img):
+    # padding = SAME으로 CNN 이후에 3x3의 행렬이 되었으므로
+    print(one_img.reshape(3, 3))
+    plt.subplot(1, 3, i + 1)
+    plt.imshow(one_img, cmap="gray")
+plt.show()
 
 
+# mnist로 확인 과정
 from tensorflow.examples.tutorials.mnist import input_data
 
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 # Color image 아님, 다 Grayscale
-# img = mnist.train.images[0].reshape(28, 28)
-# img = img.reshape(-1, 28, 28, 1)
-# plt.imshow(img, cmap="gray")
-# plt.show()
+img = mnist.train.images[0].reshape(28, 28)
+img = img.reshape(-1, 28, 28, 1)
+plt.imshow(img, cmap="gray")
+plt.show()
 
-# rows, cols, color sheets, kernels
-# W1 = tf.Variable(tf.random_normal([3, 3, 1, 5], stddev=0.01))
+rows, cols, color sheets, kernels
+W1 = tf.Variable(tf.random_normal([3, 3, 1, 5], stddev=0.01))
 
-# sess = tf.InteractiveSession()
-# conv = tf.nn.conv2d(img, W1, strides=[1, 2, 2, 1], padding="SAME")
+sess = tf.InteractiveSession()
+conv = tf.nn.conv2d(img, W1, strides=[1, 2, 2, 1], padding="SAME")
 # stride가 두 칸씩 움직인다면 아마도 input.rows/2, input.cols/2. input's dimension과 맞춰서 이런 모양?
-# sess.run(tf.global_variables_initializer())
-# conv_img = conv.eval()
+sess.run(tf.global_variables_initializer())
+conv_img = conv.eval()
 
-# conv_img = np.swapaxes(conv_img, 0, 3)
-# for i, one_img in enumerate(conv_img):
-#     plt.subplot(1, 5, i + 1), plt.imshow(one_img.reshape(14, 14), cmap="gray")
-# plt.show()
+conv_img = np.swapaxes(conv_img, 0, 3)
+for i, one_img in enumerate(conv_img):
+    plt.subplot(1, 5, i + 1), plt.imshow(one_img.reshape(14, 14), cmap="gray")
+plt.show()
 
-# pool = tf.nn.max_pool(conv, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="SAME")
-# sess.run(tf.global_variables_initializer())
-# pool_img = pool.eval()
+pool = tf.nn.max_pool(conv, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="SAME")
+sess.run(tf.global_variables_initializer())
+pool_img = pool.eval()
 
-# pool_img = np.swapaxes(pool_img, 0, 3)
-# for i, one_img in enumerate(pool_img):
-#     plt.subplot(1, 5, i + 1)
-#     plt.imshow(one_img.reshape(7, 7), cmap="gray")
-# plt.show()
+pool_img = np.swapaxes(pool_img, 0, 3)
+for i, one_img in enumerate(pool_img):
+    plt.subplot(1, 5, i + 1)
+    plt.imshow(one_img.reshape(7, 7), cmap="gray")
+plt.show()
 
 
 # Deep Learning으로의 모형 구축
